@@ -9,11 +9,9 @@ import store.agong.authentication.global.exception.BaseException;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ExceptionResponse {
-    private Integer errorCode;
-    private String message;
+    private String errorMessage;
 
     public ExceptionResponse(BaseException e) {
-        this.errorCode = e.getErrorCode();
-        this.message = e.getMessage();
+        this.errorMessage = e.getErrorMessage();
     }
 }

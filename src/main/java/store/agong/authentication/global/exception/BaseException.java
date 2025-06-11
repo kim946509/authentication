@@ -1,15 +1,16 @@
 package store.agong.authentication.global.exception;
 
 import lombok.Getter;
+import org.springframework.http.HttpStatus;
 
 @Getter
 public class BaseException extends RuntimeException {
 
-    private final Integer errorCode;
-    private final String message;
+    private final HttpStatus httpStatus;
+    private final String errorMessage;
 
-    public BaseException(Integer errorCode, String message) {
-        this.errorCode = errorCode;
-        this.message = message;
+    public BaseException(HttpStatus httpStatus, String errorMessage) {
+        this.httpStatus = httpStatus;
+        this.errorMessage = errorMessage;
     }
 }

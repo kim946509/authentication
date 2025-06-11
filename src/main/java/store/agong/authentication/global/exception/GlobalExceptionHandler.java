@@ -17,7 +17,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ExceptionResponse> handleMemberException(BaseException e) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(e);
         return ResponseEntity
-                .status(e.getErrorCode())
+                .status(e.getHttpStatus())
                 .body(exceptionResponse);
     }
 
@@ -28,7 +28,7 @@ public class GlobalExceptionHandler {
                 .map(DefaultMessageSourceResolvable::getDefaultMessage)
                 .collect(Collectors.joining(". "));
 
-        return ResponseEntity.badRequest().body(new ExceptionResponse(400, message));
+        return ResponseEntity.badRequest().body(new ExceptionResponse(message));
     }
 
 }
