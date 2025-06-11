@@ -1,5 +1,6 @@
 package store.agong.authentication.global.exception;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import java.util.stream.Collectors;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import store.agong.authentication.global.response.ExceptionResponse;
 
 @RestControllerAdvice
+@Hidden
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(BaseException.class)
