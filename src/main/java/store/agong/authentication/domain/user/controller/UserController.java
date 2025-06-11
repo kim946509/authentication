@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import store.agong.authentication.domain.user.request.SignupRequest;
 import store.agong.authentication.domain.user.response.SignupResponse;
-import store.agong.authentication.domain.user.service.UserService;
+import store.agong.authentication.domain.user.service.UserSignupService;
 import store.agong.authentication.global.response.SuccessResponse;
 
 @RestController
@@ -14,11 +14,11 @@ import store.agong.authentication.global.response.SuccessResponse;
 @RequestMapping
 public class UserController {
 
-    private final UserService userService;
+    private final UserSignupService userSignupService;
 
     @PostMapping("/signup")
     public ResponseEntity<SuccessResponse<SignupResponse>> signup(@RequestBody @Valid SignupRequest request) {
-        SignupResponse response = userService.signup(request);
+        SignupResponse response = userSignupService.signup(request);
         return ResponseEntity.ok(SuccessResponse.success(response));
     }
 }

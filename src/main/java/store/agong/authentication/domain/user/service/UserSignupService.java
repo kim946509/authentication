@@ -10,14 +10,11 @@ import store.agong.authentication.domain.user.request.SignupRequest;
 import store.agong.authentication.domain.user.response.SignupResponse;
 import store.agong.authentication.global.exception.BaseException;
 
-import java.util.Set;
-
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class UserSignupService {
 
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
 
     public SignupResponse signup(SignupRequest request) {
         if (userRepository.existsByUsername(request.getUsername())) {
