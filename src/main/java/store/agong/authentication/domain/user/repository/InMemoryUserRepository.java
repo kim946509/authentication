@@ -41,8 +41,4 @@ public class InMemoryUserRepository implements UserRepository {
         return store.containsKey(username);
     }
 
-    @Override
-    public long count() {
-        return store.size();
-    }
 }
