@@ -9,4 +9,5 @@ public interface UserRepository {
     User save(User user);
     boolean existsByUsername(String username);
     Optional<User> findActiveByUsername(String username);
+    User update(User user);
 }

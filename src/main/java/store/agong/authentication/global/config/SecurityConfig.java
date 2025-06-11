@@ -51,6 +51,8 @@ public class SecurityConfig {
                                 "/swagger-ui/**",
                                 "/reissue"
                         ).permitAll()
+                        .requestMatchers("/admin/grant").hasRole("SUPER_ADMIN")
+                        .requestMatchers("/admin/**").hasAnyRole("ADMIN","SUPER_ADMIN")
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

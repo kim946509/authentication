@@ -44,4 +44,14 @@ public class User extends BaseTimeEntity {
     public void encodePassword(PasswordEncoder encoder) {
         this.password = encoder.encode(this.password);
     }
+
+    public void grantAdminRole(){
+        if (this.roles == null) {
+            this.roles = new HashSet<>();
+        }
+        if (this.roles.contains(Role.ADMIN)) {
+            throw new BaseException(HttpStatus.BAD_REQUEST, "이미 ADMIN 권한이 부여된 사용자입니다.");
+        }
+        this.roles.add(Role.ADMIN);
+    }
 }
