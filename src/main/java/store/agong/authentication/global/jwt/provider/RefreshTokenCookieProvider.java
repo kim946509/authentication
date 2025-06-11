@@ -1,4 +1,4 @@
-package store.agong.authentication.global.jwt;
+package store.agong.authentication.global.jwt.provider;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseCookie;
@@ -24,4 +24,13 @@ public class RefreshTokenCookieProvider {
                 .maxAge(refreshTokenMaxAge)
                 .build();
     }
+
+    public ResponseCookie delete() {
+        return ResponseCookie.from("refreshToken", "")
+                .httpOnly(true)
+                .path("/")
+                .maxAge(0)
+                .build();
+    }
+
 }
