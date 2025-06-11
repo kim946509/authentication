@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import java.util.HashSet;
 import java.util.Set;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import store.agong.authentication.domain.user.enums.Role;
 import store.agong.authentication.domain.user.request.SignupRequest;
 import store.agong.authentication.global.exception.BaseException;
@@ -38,5 +39,9 @@ public class User extends BaseTimeEntity {
             throw new BaseException(HttpStatus.BAD_REQUEST,"이미 ID가 할당된 사용자입니다.");
         }
         this.id = id;
+    }
+
+    public void encodePassword(PasswordEncoder encoder) {
+        this.password = encoder.encode(this.password);
     }
 }

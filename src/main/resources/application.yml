@@ -8,5 +8,5 @@ springdoc:
 
 jwt:
   secret: Adsfvabewryethadbgnq4ertjadfhjmetDHJarkmyshfzdjykmrtdsejkymhndgThJymhfngbfcsdd
-  access-token-expiration: 7,200,000       # 2?? (ms)
-  refresh-token-expiration: 604,800,000   # 7? (ms)
+  access-token-expiration: 7200000       # 2일 (ms)
+  refresh-token-expiration: 604800000   # 7일 (ms)

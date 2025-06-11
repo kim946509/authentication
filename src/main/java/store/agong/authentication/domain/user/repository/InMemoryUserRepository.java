@@ -20,6 +20,15 @@ public class InMemoryUserRepository implements UserRepository {
     }
 
     @Override
+    public Optional<User> findActiveByUsername(String username) {
+        User user = store.get(username);
+        if (user == null || user.isDeleted()) {
+            return Optional.empty();
+        }
+        return Optional.of(user);
+    }
+
+    @Override
     public User save(User user) {
         user.assignId(idSequence.getAndIncrement());
         user.markCreated(user.getUsername());
@@ -32,8 +41,4 @@ public class InMemoryUserRepository implements UserRepository {
         return store.containsKey(username);
     }
 
-    @Override
-    public long count() {
-        return store.size();
-    }
 }
