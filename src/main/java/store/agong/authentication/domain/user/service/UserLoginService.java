@@ -9,7 +9,7 @@ import store.agong.authentication.domain.user.entity.User;
 import store.agong.authentication.domain.user.repository.UserRepository;
 import store.agong.authentication.domain.user.request.LoginRequest;
 import store.agong.authentication.global.exception.BaseException;
-import store.agong.authentication.global.jwt.JwtTokenProvider;
+import store.agong.authentication.global.jwt.provider.JwtTokenProvider;
 
 @Service
 @RequiredArgsConstructor

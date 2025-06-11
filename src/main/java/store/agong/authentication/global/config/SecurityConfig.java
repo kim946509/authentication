@@ -14,7 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import store.agong.authentication.global.jwt.JwtAuthenticationFilter;
+import store.agong.authentication.global.jwt.filter.JwtAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity

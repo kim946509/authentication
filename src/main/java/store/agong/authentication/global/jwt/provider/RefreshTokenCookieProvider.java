@@ -1,4 +1,4 @@
-package store.agong.authentication.global.jwt;
+package store.agong.authentication.global.jwt.provider;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseCookie;

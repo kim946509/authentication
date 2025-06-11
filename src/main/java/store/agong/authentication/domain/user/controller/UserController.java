@@ -13,7 +13,7 @@ import store.agong.authentication.domain.user.response.LoginResponse;
 import store.agong.authentication.domain.user.response.SignupResponse;
 import store.agong.authentication.domain.user.service.UserLoginService;
 import store.agong.authentication.domain.user.service.UserSignupService;
-import store.agong.authentication.global.jwt.RefreshTokenCookieProvider;
+import store.agong.authentication.global.jwt.provider.RefreshTokenCookieProvider;
 import store.agong.authentication.global.response.SuccessResponse;
 
 @RestController

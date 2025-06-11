@@ -1,4 +1,4 @@
-package store.agong.authentication.global.jwt;
+package store.agong.authentication.global.jwt.provider;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

@@ -1,4 +1,4 @@
-package store.agong.authentication.global.jwt;
+package store.agong.authentication.global.jwt.filter;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -12,6 +12,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import store.agong.authentication.domain.user.enums.Role;
 import java.io.IOException;
 import java.util.Set;
+import store.agong.authentication.global.jwt.dto.UserAuthentication;
+import store.agong.authentication.global.jwt.provider.JwtTokenProvider;
 
 @Component
 @RequiredArgsConstructor

@@ -1,4 +1,4 @@
-package store.agong.authentication.global.jwt;
+package store.agong.authentication.global.jwt.dto;
 
 import lombok.Getter;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
