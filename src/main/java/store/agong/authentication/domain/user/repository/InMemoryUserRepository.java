@@ -1,8 +1,5 @@
 package store.agong.authentication.domain.user.repository;
 
-import java.util.Set;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import store.agong.authentication.domain.user.entity.User;
 
@@ -24,7 +21,8 @@ public class InMemoryUserRepository implements UserRepository {
 
     @Override
     public User save(User user) {
-        user = User.of(idSequence.getAndIncrement(), user.getUsername(), user.getPassword(), user.getNickname(), user.getRoles());
+        user.assignId(idSequence.getAndIncrement());
+        user.markCreated(user.getUsername());
         store.put(user.getUsername(), user);
         return user;
     }

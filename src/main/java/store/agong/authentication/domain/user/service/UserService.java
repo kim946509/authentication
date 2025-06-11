@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import store.agong.authentication.domain.user.entity.User;
-import store.agong.authentication.domain.user.enums.Role;
 import store.agong.authentication.domain.user.repository.UserRepository;
 import store.agong.authentication.domain.user.request.SignupRequest;
 import store.agong.authentication.domain.user.response.SignupResponse;
@@ -26,6 +25,6 @@ public class UserService {
         }
         User user = User.from(request);
         User savedUser = userRepository.save(user);
-        return new SignupResponse(savedUser.getUsername(), savedUser.getNickname(), savedUser.getRoles());
+        return SignupResponse.from(savedUser);
     }
 }

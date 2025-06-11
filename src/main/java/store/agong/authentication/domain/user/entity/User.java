@@ -7,19 +7,22 @@ import lombok.NoArgsConstructor;
 
 import java.util.HashSet;
 import java.util.Set;
+import org.springframework.http.HttpStatus;
 import store.agong.authentication.domain.user.enums.Role;
 import store.agong.authentication.domain.user.request.SignupRequest;
+import store.agong.authentication.global.exception.BaseException;
+import store.agong.authentication.global.util.BaseTimeEntity;
 
 @Getter
 @NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
 @AllArgsConstructor(access = lombok.AccessLevel.PRIVATE)
 @Builder
-public class User {
+public class User extends BaseTimeEntity {
     private Long id;
     private String username;
     private String password;
     private String nickname;
-    private Set<Role> roles = new HashSet<>();
+    private Set<Role> roles;
 
     public static User from(SignupRequest signupRequest) {
         return User.builder()
@@ -30,13 +33,10 @@ public class User {
                 .build();
     }
 
-    public static User of(Long id, String username, String password, String nickname, Set<Role> roles) {
-        return User.builder()
-                .id(id)
-                .username(username)
-                .password(password)
-                .nickname(nickname)
-                .roles(roles)
-                .build();
+    public void assignId(Long id) {
+        if (this.id != null) {
+            throw new BaseException(HttpStatus.BAD_REQUEST,"이미 ID가 할당된 사용자입니다.");
+        }
+        this.id = id;
     }
 }
