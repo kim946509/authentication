@@ -15,13 +15,14 @@ import store.agong.authentication.global.exception.BaseException;
 public class UserSignupService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public SignupResponse signup(SignupRequest request) {
         if (userRepository.existsByUsername(request.getUsername())) {
             throw new BaseException(HttpStatus.BAD_REQUEST, "중복된 아이디입니다.");
         }
         User user = User.from(request);
-        User savedUser = userRepository.save(user);
-        return SignupResponse.from(savedUser);
+        user.encodePassword(passwordEncoder);
+        return SignupResponse.from(userRepository.save(user));
     }
 }
