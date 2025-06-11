@@ -75,6 +75,10 @@ public class JwtTokenProvider {
         return "access".equals(getTokenType(token));
     }
 
+    public boolean isRefreshToken(String refreshToken) {
+        return "refresh".equals(getTokenType(refreshToken));
+    }
+
     private Claims parseClaims(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8)))
