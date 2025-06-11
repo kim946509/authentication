@@ -24,4 +24,13 @@ public class RefreshTokenCookieProvider {
                 .maxAge(refreshTokenMaxAge)
                 .build();
     }
+
+    public ResponseCookie delete() {
+        return ResponseCookie.from("refreshToken", "")
+                .httpOnly(true)
+                .path("/")
+                .maxAge(0)
+                .build();
+    }
+
 }
