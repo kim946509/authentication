@@ -4,9 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import store.agong.authentication.domain.admin.response.GrantAdminResponse;
-import store.agong.authentication.domain.forceReLogin.service.ForcedReLoginService;
+import store.agong.authentication.domain.forcedReLogin.service.ForcedReLoginService;
 import store.agong.authentication.domain.user.entity.User;
-import store.agong.authentication.domain.user.enums.Role;
 import store.agong.authentication.domain.user.repository.UserRepository;
 import store.agong.authentication.global.exception.BaseException;
 

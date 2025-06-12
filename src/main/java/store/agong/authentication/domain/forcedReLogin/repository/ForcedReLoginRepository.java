@@ -1,4 +1,4 @@
-package store.agong.authentication.domain.forceReLogin.repository;
+package store.agong.authentication.domain.forcedReLogin.repository;
 
 public interface ForcedReLoginRepository {
     void save(String username);

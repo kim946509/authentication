@@ -1,11 +1,11 @@
-package store.agong.authentication.domain.forceReLogin.service;
+package store.agong.authentication.domain.forcedReLogin.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
-import store.agong.authentication.domain.forceReLogin.repository.ForcedReLoginRepository;
+import store.agong.authentication.domain.forcedReLogin.repository.ForcedReLoginRepository;
 
 import java.io.IOException;
 import store.agong.authentication.global.response.ExceptionResponse;
