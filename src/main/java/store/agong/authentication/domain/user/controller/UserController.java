@@ -1,5 +1,6 @@
 package store.agong.authentication.domain.user.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -21,6 +22,7 @@ import store.agong.authentication.domain.user.service.UserTokenReissueService;
 import store.agong.authentication.global.jwt.provider.RefreshTokenCookieProvider;
 import store.agong.authentication.global.response.SuccessResponse;
 
+@Tag(name = "유저", description = "회원 관련 API")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping
