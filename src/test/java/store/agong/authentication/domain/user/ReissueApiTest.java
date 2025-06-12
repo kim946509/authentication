@@ -11,7 +11,9 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Set;
+import store.agong.authentication.domain.user.entity.User;
 import store.agong.authentication.domain.user.enums.Role;
+import store.agong.authentication.domain.user.repository.UserRepository;
 import store.agong.authentication.global.jwt.provider.JwtTokenProvider;
 import store.agong.authentication.global.jwt.repository.RefreshTokenRepository;
 
@@ -25,13 +27,20 @@ class ReissueApiTest {
     @Autowired private MockMvc mockMvc;
     @Autowired private JwtTokenProvider jwtTokenProvider;
     @Autowired private RefreshTokenRepository refreshTokenRepository;
-
+    @Autowired private UserRepository userRepository;
     @Test
     @DisplayName("토큰 재발급 - 성공")
     void reissue_success() throws Exception {
         // given
         String username = "reissuer";
         Set<Role> roles = Set.of(Role.USER);
+
+        userRepository.save(User.builder()
+                .username(username)
+                .password("test")
+                .nickname("리이슈")
+                .roles(roles)
+                .build());
 
         String refreshToken = jwtTokenProvider.generateRefreshToken(username, Set.of(store.agong.authentication.domain.user.enums.Role.USER));
         refreshTokenRepository.save(username, refreshToken);
