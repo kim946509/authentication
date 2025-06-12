@@ -8,7 +8,7 @@ import lombok.Getter;
 public class GrantAdminRequest {
     @Schema(
             description = "관리자 권한을 부여할 대상 유저의 username",
-            example = "grant_admin_target_user"
+            example = "user"
     )
     @NotBlank(message = "username은 필수입니다.")
     private String username;

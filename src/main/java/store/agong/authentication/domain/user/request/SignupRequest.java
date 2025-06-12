@@ -4,7 +4,9 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 
 @Getter
-public class SignupRequest {
+public class
+SignupRequest {
+
     @NotBlank(message = "username은 필수입니다.")
     private String username;
 
