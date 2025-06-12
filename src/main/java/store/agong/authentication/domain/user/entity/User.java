@@ -10,6 +10,8 @@ import java.util.Set;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import store.agong.authentication.domain.user.enums.Role;
+import store.agong.authentication.domain.user.exception.AlreadyAdminUserException;
+import store.agong.authentication.domain.user.exception.AlreadyAssignIdException;
 import store.agong.authentication.domain.user.request.SignupRequest;
 import store.agong.authentication.global.exception.BaseException;
 import store.agong.authentication.global.util.BaseTimeEntity;
@@ -36,7 +38,7 @@ public class User extends BaseTimeEntity {
 
     public void assignId(Long id) {
         if (this.id != null) {
-            throw new BaseException(HttpStatus.BAD_REQUEST,"이미 ID가 할당된 사용자입니다.");
+            throw new AlreadyAssignIdException();
         }
         this.id = id;
     }
@@ -50,7 +52,7 @@ public class User extends BaseTimeEntity {
             this.roles = new HashSet<>();
         }
         if (this.roles.contains(Role.ADMIN)) {
-            throw new BaseException(HttpStatus.BAD_REQUEST, "이미 ADMIN 권한이 부여된 사용자입니다.");
+            throw new AlreadyAdminUserException();
         }
         this.roles.add(Role.ADMIN);
     }

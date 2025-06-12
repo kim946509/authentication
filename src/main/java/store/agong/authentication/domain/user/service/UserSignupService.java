@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import store.agong.authentication.domain.user.entity.User;
+import store.agong.authentication.domain.user.exception.OverlappedUsernameException;
 import store.agong.authentication.domain.user.repository.UserRepository;
 import store.agong.authentication.domain.user.request.SignupRequest;
 import store.agong.authentication.domain.user.response.SignupResponse;
@@ -19,7 +20,7 @@ public class UserSignupService {
 
     public SignupResponse signup(SignupRequest request) {
         if (userRepository.existsByUsername(request.getUsername())) {
-            throw new BaseException(HttpStatus.BAD_REQUEST, "중복된 아이디입니다.");
+            throw new OverlappedUsernameException();
         }
         User user = User.from(request);
         user.encodePassword(passwordEncoder);
