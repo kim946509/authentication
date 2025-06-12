@@ -1,3 +1,12 @@
 spring:
   application:
     name: authentication
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+jwt:
+  secret: Adsfvabewryethadbgnq4ertjadfhjmetDHJarkmyshfzdjykmrtdsejkymhndgThJymhfngbfcsdd
+  access-token-expiration: 7200000       # 2일 (ms)
+  refresh-token-expiration: 604800000   # 7일 (ms)
