@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import store.agong.authentication.domain.forceReLogin.service.ForcedReLoginChecker;
+import store.agong.authentication.domain.forceReLogin.service.ForcedReLoginService;
 import store.agong.authentication.domain.user.dto.LoginDto;
 import store.agong.authentication.domain.user.entity.User;
 import store.agong.authentication.domain.user.repository.UserRepository;
@@ -20,6 +22,7 @@ public class UserLoginService {
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
     private final RefreshTokenRepository refreshTokenRepository;
+    private final ForcedReLoginService forcedReLoginService;
 
     public LoginDto login(LoginRequest request) {
         User user = userRepository.findActiveByUsername(request.getUsername())
@@ -32,6 +35,8 @@ public class UserLoginService {
         String accessToken = jwtTokenProvider.generateAccessToken(user.getUsername(), user.getRoles());
         String refreshToken = jwtTokenProvider.generateRefreshToken(user.getUsername(), user.getRoles());
         refreshTokenRepository.save(user.getUsername(), refreshToken);
+
+        forcedReLoginService.unforce(user.getUsername());
 
         return new LoginDto(accessToken, refreshToken);
     }

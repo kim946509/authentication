@@ -9,6 +9,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+import store.agong.authentication.domain.forceReLogin.service.ForcedReLoginChecker;
+import store.agong.authentication.domain.forceReLogin.service.ForcedReLoginService;
 import store.agong.authentication.domain.user.enums.Role;
 import java.io.IOException;
 import java.util.Set;
@@ -20,6 +22,7 @@ import store.agong.authentication.global.jwt.provider.JwtTokenProvider;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtTokenProvider jwtTokenProvider;
+    private final ForcedReLoginChecker forcedReLoginChecker;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -30,6 +33,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         if (token != null && jwtTokenProvider.validateToken(token) && jwtTokenProvider.isAccessToken(token)) {
             String username = jwtTokenProvider.getUsername(token);
+
+            if (forcedReLoginChecker.isForced(username)) {
+                forcedReLoginChecker.handleForced(response);
+                return;
+            }
+
             Set<Role> roles = jwtTokenProvider.getRoles(token);
 
             // 사용자 인증 객체 생성
