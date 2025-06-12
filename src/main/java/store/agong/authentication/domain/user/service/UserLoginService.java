@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import store.agong.authentication.domain.forcedReLogin.service.ForcedReLoginService;
 import store.agong.authentication.domain.user.dto.LoginDto;
 import store.agong.authentication.domain.user.entity.User;
+import store.agong.authentication.domain.user.exception.InvalidLoginExcepiton;
 import store.agong.authentication.domain.user.repository.UserRepository;
 import store.agong.authentication.domain.user.request.LoginRequest;
 import store.agong.authentication.global.exception.BaseException;
@@ -25,10 +26,10 @@ public class UserLoginService {
 
     public LoginDto login(LoginRequest request) {
         User user = userRepository.findActiveByUsername(request.getUsername())
-                .orElseThrow(() -> new BaseException(HttpStatus.UNAUTHORIZED, "아이디 또는 비밀번호가 올바르지 않습니다."));
+                .orElseThrow(InvalidLoginExcepiton::new);
 
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-            throw new BaseException(HttpStatus.UNAUTHORIZED, "아이디 또는 비밀번호가 올바르지 않습니다.");
+            throw new InvalidLoginExcepiton();
         }
 
         String accessToken = jwtTokenProvider.generateAccessToken(user.getUsername(), user.getRoles());
