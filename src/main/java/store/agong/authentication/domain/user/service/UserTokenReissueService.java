@@ -40,7 +40,7 @@ public class UserTokenReissueService {
 
         // 3. 최신 권한 정보 조회
         User user = userRepository.findActiveByUsername(username)
-                .orElseThrow(() -> new BaseException(HttpStatus.UNAUTHORIZED, "유저 정보를 찾을 수 없습니다."));
+                .orElseThrow(() -> new BaseException(HttpStatus.NOT_FOUND, "유저 정보를 찾을 수 없습니다."));
         Set<Role> roles = user.getRoles();
 
         // 4. 재발급
