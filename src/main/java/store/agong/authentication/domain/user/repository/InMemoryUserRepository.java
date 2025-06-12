@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
+import store.agong.authentication.domain.user.exception.NotFindUserException;
 import store.agong.authentication.global.exception.BaseException;
 
 @Repository
@@ -46,7 +47,7 @@ public class InMemoryUserRepository implements UserRepository {
     @Override
     public User update(User user) {
         if (!store.containsKey(user.getUsername())) {
-            throw new BaseException(HttpStatus.NOT_FOUND, "해당 사용자를 찾을 수 없습니다.");
+            throw new NotFindUserException();
         }
         store.put(user.getUsername(), user);
         return user;

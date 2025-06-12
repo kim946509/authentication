@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import store.agong.authentication.domain.user.dto.ReissueDto;
 import store.agong.authentication.domain.user.entity.User;
 import store.agong.authentication.domain.user.enums.Role;
+import store.agong.authentication.domain.user.exception.InvalidTokenException;
 import store.agong.authentication.domain.user.repository.UserRepository;
 import store.agong.authentication.domain.user.response.ReissueResponse;
 import store.agong.authentication.global.exception.BaseException;
@@ -25,22 +26,22 @@ public class UserTokenReissueService {
 
         // 1. RefreshToken 유효성 검사
         if (!jwtTokenProvider.validateToken(refreshToken) || !jwtTokenProvider.isRefreshToken(refreshToken)) {
-            throw new BaseException(HttpStatus.UNAUTHORIZED, "토큰이 유효하지 않거나 만료되었습니다");
+            throw new InvalidTokenException();
         }
 
         String username = jwtTokenProvider.getUsername(refreshToken);
 
         // 2. 저장소에서 토큰 존재 여부 확인
         String storedRefreshToken = refreshTokenRepository.findByUsername(username)
-                .orElseThrow(() -> new BaseException(HttpStatus.UNAUTHORIZED, "토큰이 유효하지 않거나 만료되었습니다"));
+                .orElseThrow(InvalidTokenException::new);
 
         if (!storedRefreshToken.equals(refreshToken)) {
-            throw new BaseException(HttpStatus.UNAUTHORIZED, "토큰이 유효하지 않거나 만료되었습니다");
+            throw new InvalidTokenException();
         }
 
         // 3. 최신 권한 정보 조회
         User user = userRepository.findActiveByUsername(username)
-                .orElseThrow(() -> new BaseException(HttpStatus.UNAUTHORIZED, "토큰이 유효하지 않거나 만료되었습니다"));
+                .orElseThrow(InvalidTokenException::new);
         Set<Role> roles = user.getRoles();
 
         // 4. 재발급
